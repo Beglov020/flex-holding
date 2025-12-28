@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Флекс-Холдинг | Строим будущее вместе</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        :root {
+            --primary: #1a1a1a;
+            --gold: #c9a96e;
+            --light-gold: #e8d9b9;
+            --dark-gray: #2d2d2d;
+            --light-gray: #f8f8f8;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26,26,26,0.8), rgba(26,26,26,0.8)), 
+                        url('img/4.jpeg') center/cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            margin-top: 0;
+            color: var(--white);
+        
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            color: var(--light-gold);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--light-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 6rem 0;
+            background: var(--light-gray);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+        }
+
+        .section-title span {
+            color: var(--gold);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Contacts Section */
+        .contacts {
+            padding: 6rem 0;
+            background: var(--light-gray);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* Secret Section */
+        .secret-section {
+            background: var(--dark-gray);
+            padding: 4rem 0;
+            color: var(--white);
+        }
+
+        .access-form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: var(--primary);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--light-gold);
+            font-weight: 300;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: var(--dark-gray);
+            border: 1px solid var(--gold);
+            border-radius: 4px;
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .hidden-content {
+            display: none;
+            margin-top: 3rem;
+        }
+
+        .access-granted .hidden-content {
+            display: block;
+        }
+
+        .cars-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: var(--primary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cars-table th,
+        .cars-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--dark-gray);
+        }
+
+        .cars-table th {
+            background: var(--gold);
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .cars-table tr:hover {
+            background: var(--dark-gray);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cars-table {
+                font-size: 0.9rem;
+            }
+
+            .cars-table th,
+            .cars-table td {
+                padding: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .project-card {
+                margin: 0 1rem;
+            }
+
+            .access-form {
+                margin: 0 1rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary);
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">FLEX<span>HOLDING</span></div>
+                <button class="mobile-menu-btn">☰</button>
+                <ul class="nav-links">
+                    <li><a href="#projects">Проекты</a></li>
+                    <li><a href="#about">О компании</a></li>
+                    <li><a href="#comand">Команда</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+
+
+            <div class="hero-content">
+                <h1>Строим будущее, сохраняя традиции</h1>
+                <p>Ведущий девелопер России, создающий архитектурные шедевры для нового поколения</p>
+                <a href="#projects" class="btn">Наши проекты</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Наши <span>проекты</span></h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-image" style="background-image: url(/img/1.jpeg')"><img src="img/1.jpeg" alt="Фото" width="100%" height="280"></div>
+                    <div class="project-content">
+                        <h3>«Башня Наследие»</h3>
+                       <div class="warning"> <h2 style="color:rgb(201, 169, 110)">Внимание: Проект отменен</h2> </div>
+                        <p>Элитный жилой комплекс в историческом центре Москвы с панорамными видами и премиальной отделкой</p>
+
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image"><img src="img/2.jpeg" alt="Фото" width="100%" height="280"></div>
+                    <div class="project-content">
+                        <h3>«Платинум Плаза»</h3>
+                        <p>Бизнес-центр класса А+ с интеллектуальной системой управления и экологичными решениями</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image")"><img src="img/3.jpeg" alt="Фото" width="100%" height="280"></div>
+                    <div class="project-content">
+                        <h3>«Горизонт Сити»</h3>
+                        <p>Многофункциональный комплекс с собственной инфраструктурой и технологиями умного города</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>О компании <span>Флекс-Холдинг</span></h2>
+                    <p>Мы - ведущая девелоперская компания России, специализирующаяся на создании элитной недвижимости в исторических центрах городов. Наш подход сочетает современные технологии строительства с уважением к архитектурному наследию.</p>
+                    <p>За 15 лет работы мы реализовали более 50 масштабных проектов, став символом качества и надежности на рынке элитной недвижимости.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Лет на рынке</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Реализованных проектов</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">120+</span>
+                            <span class="stat-label">Профессионалов в команде</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">Довольных клиентов</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .team-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            font-family: Arial, sans-serif;
+             background-color: rgb(248, 248, 248);
+        }
+        
+        .team-title {
+            color: rgb(201, 169, 110);
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            font-weight: bold;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .member-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .member-position {
+            color: rgb(201, 169, 110);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .member-description {
+            color: #666;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<section id="comand" class="projects">
+        <div class="container">
+            <h2 class="section-title">Наша <span>команда</span></h2>
+ 
+        <div class="team-grid">
+            <!-- Павел Светлов -->
+            <div class="team-member">
+                <div class="member-photo">
+                     <img src="img/5.jpeg" alt="Павел Светлов" class="member-photo">
+                </div>
+                <h3 class="member-name">Павел Светлов</h3>
+                <div class="member-position">Генеральный директор</div>
+                <p class="member-description">
+                    Основатель компании, эксперт в области девелопмента с 20-летним опытом
+                </p>
+            </div>
+            
+            <!-- Оксана Самурова -->
+            <div class="team-member">
+                <div class="member-photo">
+                    <img src="img/6.jpeg" alt="Самурова" class="member-photo">
+                </div>
+                <h3 class="member-name">Оксана Самурова</h3>
+                <div class="member-position">Финансовый директор</div>
+                <p class="member-description">
+                    Специалист по управлению финансами и инвестиционными проектами
+                </p>
+            </div>
+            
+            <!-- Дмитрий Волков -->
+            <div class="team-member">
+                <div class="member-photo">
+                    <img src="img/7.jpeg" alt="Волков" class="member-photo">
+                </div>
+                <h3 class="member-name">Дмитрий Волков</h3>
+                <div class="member-position">Директор по развитию</div>
+                <p class="member-description">
+                    Отвечает за стратегическое планирование и новые рынки
+                </p>
+            </div>
+            
+                     
+            <!-- Сергей Морозов -->
+            <div class="team-member">
+                <div class="member-photo">
+                    <img src="img/8.jpeg" alt="Волков" class="member-photo">
+                </div>
+                <h3 class="member-name">Сергей Морозов</h3>
+                <div class="member-position">Начальник службы безопасности</div>
+                <p class="member-description">
+                    Отвечает за безопасность компании и сотрудников
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="secret-section">
+        <div class="container">
+            <div class="access-form">
+                <h3 style="margin-bottom: 1rem; color: var(--gold);">Служебный доступ</h3>
+                <p style="color: var(--light-gold); margin-bottom: 1rem; font-size: 0.9rem;">Для доступа к служебной информации введите код</p>
+                <div class="form-group">
+                    <input type="password" id="access-code" placeholder="Код доступа">
+                </div>
+                <button onclick="checkAccess()" class="btn">Получить доступ</button>
+            </div>
+            
+            <div id="hidden-content" class="hidden-content">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--gold);">Служебный отдел</h3>
+                <table class="cars-table">
+                    <thead>
+                        <tr>
+                            <th>Фамилия</th>
+                            <th>Имя</th>
+                            <th>Должность</th>
+                            <th>Номер телефона:</th>
+                            <th>Номер машины</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     
+                        <tr>
+                            <td>Светлов</td>
+                            <td>Павел</td>
+                            <td>Генеральный директор</td>
+                           <td>+7 287 001 02 30</td>
+                            <td>У001РР287</td>
+                        </tr>
+                        <tr>
+                            <td>Самурова</td>
+                            <td>Оксана</td>
+                            <td>Финансовый директор</td>
+                            <td>+7 287 001 15 18</td>
+                            <td>У287РР287</td>
+                        </tr>
+                        <tr>
+                            <td>Крылов</td>
+                            <td>Антон</td>
+                            <td>Юрисконсульт</td>
+                           <td>+7 287 003 50 70</td>
+                            <td>М003РС287</td>
+                        </tr>
+                        <tr>
+                            <td>Волков</td>
+                            <td>Дмитрий</td>
+                            <td>Директор по развитию</td>
+                            <td>+7 287 030 08 79</td>
+                            <td>У050РР287</td>
+                        </tr>
+                        <tr>
+                            <td>Петрова</td>
+                            <td>Екатерина</td>
+                            <td>Главный бухгалтер</td>
+                            <td>+7 287 015 15 50</td>
+                            <td>А015АА287</td>
+                        </tr>
+                        <tr>
+                            <td>Семенов</td>
+                            <td>Алексей</td>
+                            <td>Начальник отдела продаж</td>
+                            <td>+7 287 013 77 77</td>
+                            <td>У013РР287</td>
+                        </tr>
+   <tr>
+                            <td>Морозов</td>
+                            <td>Сергей</td>
+                            <td>Начальник службы безопасности</td>
+                            <td>+7 287 964 12 18</td>
+                            <td>М287РС287</td>
+                        </tr>
+                        <tr>
+                            <td>Николаев</td>
+                            <td>Игорь</td>
+                            <td>Технический директор</td>
+                             <td>+7 287 287 28 28</td>
+                            <td>У007РР287</td>
+                        </tr>
+                        <tr>
+                            <td>Кузнецов</td>
+                            <td>Артем</td>
+                            <td>Руководитель проектов</td>
+                            <td>+7 287 777 34 77</td>
+                            <td>М777РР287</td>
+                        </tr>
+                        <tr>
+                            <td>Соколова</td>
+                            <td>Ольга</td>
+                            <td>HR-директор</td>
+                            <td>+7 287 315 12 96</td>
+                            <td>А216ТС287</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>Москва, ул. Тверская, 10</p>
+                    <p>info@flex-holding.ru</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Время работы офиса</h3>
+                    <p>Пн-Пт: 9:00-18:00</p>
+                    <p>Сб-Вс: выходной</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Социальные сети</h3>
+                    <p>LinkedIn</p>
+                    <p>Facebook</p>
+                    <p>Instagram</p>
+                </div>
+            </div>
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--dark-gray);">
+                <p>&copy; Флекс-Холдинг. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Проверка доступа
+        function checkAccess() {
+            const accessCode = document.getElementById('access-code').value;
+            const correctCode = 'flex287'; // Пароль для доступа
+            
+            if (accessCode === correctCode) {
+                document.querySelector('.secret-section').classList.add('access-granted');
+                // Сохраняем доступ в localStorage
+                localStorage.setItem('flex_access', 'granted');
+            } else {
+                alert('Неверный код доступа');
+            }
+        }
+
+        // Проверяем сохраненный доступ при загрузке
+        window.addEventListener('load', function() {
+            if (localStorage.getItem('flex_access') === 'granted') {
+                document.querySelector('.secret-section').classList.add('access-granted');
+            }
+        });
+
+        // Мобильное меню
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Скрываем мобильное меню при клике на ссылку
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Обработка формы
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
